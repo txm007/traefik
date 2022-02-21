@@ -10,7 +10,7 @@ services:
   portfolio:
     image: cedricmarinot/docker-portfolio
     labels:
-      - traefik.http.routers.portfolio.rule=Host(`blog.cedricmarinot.fr`)
+      - traefik.http.routers.portfolio.rule=Host(`portfolio.cedricmarinot.fr`)
       - traefik.http.routers.portfolio.tls=true
       - traefik.http.routers.portfolio.tls.certresolver=lets-encrypt
       - traefik.port=80
