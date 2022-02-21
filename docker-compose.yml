@@ -1,8 +1,26 @@
-version: '3'
+version: "3"
 
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+    
 services:
+
+  services:
+    portfolio:
+      image: cedricmarinot/docker-portfolio
+      labels:
+        - traefik.http.routers.portfolio.rule=Host(`blog.cedricmarinot.fr`)
+        - traefik.http.routers.portfolio.tls=true
+        - traefik.http.routers.portfolio.tls.certresolver=lets-encrypt
+        - traefik.port=80
+      networks:
+        - internal
+        - web
+
   reverse-proxy:
-    # The official v2 Traefik docker image
     image: traefik:v2.6
     # Enables the web UI and tells Traefik to listen to docker
     command: --api.insecure=true --providers.docker
