@@ -7,18 +7,16 @@ networks:
     external: false
     
 services:
-
-  services:
-    portfolio:
-      image: cedricmarinot/docker-portfolio
-      labels:
-        - traefik.http.routers.portfolio.rule=Host(`blog.cedricmarinot.fr`)
-        - traefik.http.routers.portfolio.tls=true
-        - traefik.http.routers.portfolio.tls.certresolver=lets-encrypt
-        - traefik.port=80
-      networks:
-        - internal
-        - web
+  portfolio:
+    image: cedricmarinot/docker-portfolio
+    labels:
+      - traefik.http.routers.portfolio.rule=Host(`blog.cedricmarinot.fr`)
+      - traefik.http.routers.portfolio.tls=true
+      - traefik.http.routers.portfolio.tls.certresolver=lets-encrypt
+      - traefik.port=80
+    networks:
+      - internal
+      - web
 
   reverse-proxy:
     image: traefik:v2.6
