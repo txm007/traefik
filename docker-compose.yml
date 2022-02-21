@@ -15,7 +15,7 @@ services:
       - /apps/traefik/acme.json:/acme.json
     restart: always
     networks:
-      - web
+      - bridge
 networks:
   web:
     external: true
