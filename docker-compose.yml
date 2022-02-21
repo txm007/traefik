@@ -10,6 +10,7 @@ services:
 
   portfolio:
     image: cedricmarinot/docker-portfolio
+    container_name: portfolio
     labels:
       - traefik.http.routers.portfolio.rule=Host(`cedricmarinot.fr`)
       - traefik.http.routers.portfolio.tls=true
@@ -21,6 +22,7 @@ services:
      
   tethys:
     image: cedricmarinot/docker-tethys
+    container_name: tethys
     labels:
       - traefik.http.routers.tethys.rule=Host(`tethys.cedricmarinot.fr`)
       - traefik.http.routers.tethys.tls=true
@@ -32,6 +34,7 @@ services:
     
   livechat:
     image: cedricmarinot/docker-livechat
+    container_name: livechat
     labels:
       - traefik.http.routers.livechat.rule=Host(`livechat.cedricmarinot.fr`)
       - traefik.http.routers.livechat.tls=true
@@ -43,13 +46,17 @@ services:
 
   reverse-proxy:
     image: traefik:v2.6
+    container_name: traefik
     # Enables the web UI and tells Traefik to listen to docker
     command: --api.insecure=true --providers.docker
     ports:
       # The HTTP port
       - "80:80"
+      # The HTTPS port
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
