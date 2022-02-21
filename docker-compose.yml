@@ -29,18 +29,7 @@ services:
     networks:
       - internal
       - web
-
-  marvin:
-    image: cedricmarinot/docker-marvin
-    labels:
-      - traefik.http.routers.marvin.rule=Host(`marvin.cedricmarinot.fr`)
-      - traefik.http.routers.marvin.tls=true
-      - traefik.http.routers.marvin.tls.certresolver=lets-encrypt
-      - traefik.port=80
-    networks:
-      - internal
-      - web
-      
+    
   livechat:
     image: cedricmarinot/docker-livechat
     labels:
