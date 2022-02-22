@@ -65,7 +65,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-     labels:
+    labels:
       - traefik.http.routers.traefik.middlewares=private-network-ipwhitelist
       - traefik.http.middlewares.private-network-ipwhitelist.ipwhitelist.sourcerange="10.8.0.1/24"
     volumes:
